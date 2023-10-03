@@ -1,6 +1,7 @@
-import React, {useState} from 'react'
-import { SafeAreaView, Text, StyleSheet, View,TextInput, Button, TouchableOpacity } from 'react-native'
-import styles from '../../styles/registrar/Registro'
+import React, {useState} from 'react';
+import { SafeAreaView, Text, StyleSheet, View,TextInput, Button, TouchableOpacity,Image } from 'react-native'
+import styles from '../../styles/registrar/Registro';
+import * as ImagePicker from 'expo-image-picker';
 
 function Registro(props)
 {
@@ -8,6 +9,23 @@ function Registro(props)
   const goToLogin = () =>{
     navigation.navigate("Login")
   }
+  const [image, setImage] = useState(null);
+
+  const pickImage = async () => {
+    // No permissions request is necessary for launching the image library
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    console.log(result);
+
+    if (!result.canceled) {
+      setImage(result.assets[0].uri);
+    }
+  };
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.firstSection}>
@@ -73,6 +91,15 @@ function Registro(props)
             </View>
         </View>
       </View>
+      <View style={styles.imageRoll}>
+        <TouchableOpacity style={styles.buttonRoll} onPress={pickImage}>
+          <Text style={styles.textRoll}>Selecciona una imagen de perfil</Text>
+          {image && <Image source={{ uri: image }} style={{ width: 170, height: 130,}} />}
+        </TouchableOpacity>
+      {/* <Button title="Selecciona una imagen de perfil" onPress={pickImage} />
+       */}
+    </View>
+
     </SafeAreaView>  
   );
 };

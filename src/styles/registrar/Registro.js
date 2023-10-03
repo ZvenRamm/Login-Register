@@ -54,5 +54,25 @@ export default StyleSheet.create({
     Login: {
         color: "pink",
         paddingLeft: 5,
+    },
+    imageRoll:{
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        
+    },
+    buttonRoll:{
+        backgroundColor:"pink",
+        padding: 15,
+        borderRadius: 30,
+        alingItems: "center",
+        width: 200,
+        height: 200
+    },
+
+    textRoll:{
+        color:"white",
+        fontWeight: "bold",
+        textAlign: "center"
     }
 })
